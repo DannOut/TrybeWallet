@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   email: '',
 };
 
+// TODO vefificar se é possível mudar o nome do reducer para ficar mais semântico
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case LOGIN_USER:

@@ -1,15 +1,15 @@
 // Coloque aqui suas actions
-import { VERIFICAR_NOME_DEPOIS, LOGIN_USER } from './types';
+import { WALLET_INFO, LOGIN_USER } from './types';
 
 export const loginAction = (userData) => ({
   type: LOGIN_USER,
   payload: userData,
 });
 
-export const VERIFICAR = (walletData) => {
+export const walletAction = (walletData) => {
   console.log(walletData);
   return {
-    type: VERIFICAR_NOME_DEPOIS,
+    type: WALLET_INFO,
     payload: walletData,
   };
 };

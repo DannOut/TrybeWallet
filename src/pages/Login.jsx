@@ -14,6 +14,7 @@ class Login extends React.Component {
     isDisabled: true,
   };
 
+  // TODO Remover ao final do projeto caso não seja usado
   componentDidMount() {
     this.handleFormValidation();
   }
@@ -52,7 +53,7 @@ class Login extends React.Component {
     });
   };
 
-  //
+  // * Submit to Wallet Page
   handleLoginSubmit = () => {
     const { history, setUser } = this.props;
     const { email } = this.state;
