@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginAction } from '../redux/actions';
+// import economyAPI from '../services/API';
 
 const EMAIL_HTML_ATTRIB = 'email';
 const PASSWORD_HTML_ATTRIB = 'password';
@@ -61,6 +62,12 @@ class Login extends React.Component {
     setUser(email);
     history.push('/carteira');
   };
+
+  // ! usado para verificar o retorno da API, pode ser deletado caso necessário
+  // teste = async () => {
+  //   const teste = await economyAPI();
+  //   return console.log(teste);
+  // };
 
   render() {
     const { email, password, isDisabled } = this.state;

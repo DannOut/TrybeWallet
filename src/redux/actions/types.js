@@ -1,3 +1,7 @@
 export const LOGIN_USER = 'LOGIN_USER';
 
 export const WALLET_INFO = 'WALLET_INFO';
+
+export const RECEIVE_API_SUCCESS = 'RECEIVE_API_SUCCESS';
+export const RECEIVE_API_FAILURE = 'RECEIVE_API_FAILURE';
+export const REQUEST_API = 'REQUEST_API';
