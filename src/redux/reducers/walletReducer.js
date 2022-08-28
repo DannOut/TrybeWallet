@@ -1,6 +1,7 @@
 import {
+  RECEIVE_CURRENCY_API_SUCCESS,
+  RECEIVE_EXPENSES_API_SUCCESS,
   RECEIVE_API_FAILURE,
-  RECEIVE_API_SUCCESS,
   REQUEST_API,
 } from '../actions/types';
 
@@ -11,32 +12,34 @@ const INITIAL_STATE = {
   idToEdit: 0,
   isFetching: false,
   error: '',
-  currency: '',
 };
 
-//* function to filter 'USDT' as requested in REQ03
-const getCurrencies = (curr) => Object.keys(curr).filter((info) => info !== 'USDT');
-
-const wallet = (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+const wallet = (state = INITIAL_STATE, { type, payload, error }) => {
+  switch (type) {
   case REQUEST_API:
     return {
       ...state,
       isFetching: true,
     };
 
-  case RECEIVE_API_SUCCESS:
-    console.log(action);
+  case RECEIVE_CURRENCY_API_SUCCESS:
     return {
       ...state,
-      currencies: getCurrencies(action.payload),
+      currencies: payload,
+      isFetching: false,
+    };
+
+  case RECEIVE_EXPENSES_API_SUCCESS:
+    return {
+      ...state,
+      expenses: [...state.expenses, payload],
       isFetching: false,
     };
 
   case RECEIVE_API_FAILURE:
     return {
       ...state,
-      error: action.error,
+      error,
       isFetching: false,
     };
 

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const CURRENCY_INPUT = 'currencyInput';
+const CURRENCY_INPUT = 'currency';
 class SelectCurrency extends Component {
   render() {
-    const { handleChange, currencies, currencyInput } = this.props;
+    const { handleChange, currencies, currency } = this.props;
 
     const optionsToForms = currencies.map((value, index) => (
       <option
@@ -21,7 +21,7 @@ class SelectCurrency extends Component {
         <select
           name={ CURRENCY_INPUT }
           id={ CURRENCY_INPUT }
-          value={ currencyInput }
+          value={ currency }
           data-testid="currency-input"
           onChange={ handleChange }
         >
@@ -34,7 +34,7 @@ class SelectCurrency extends Component {
 
 SelectCurrency.propTypes = {
   handleChange: PropTypes.func.isRequired,
-  currencyInput: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 

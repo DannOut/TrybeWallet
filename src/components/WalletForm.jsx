@@ -4,20 +4,22 @@ import PropTypes from 'prop-types';
 import SelectCurrency from './SelectCurrency';
 import PaymentMethod from './PaymentMethod';
 import ExpenseTag from './ExpenseTag';
-import { fetchAPIThunk } from '../redux/actions';
+import { fetchCurrencyAPIThunk, fetchExpenseAPIThunk } from '../redux/actions';
 
-const VALUE_INPUT = 'valueInput';
-const DESCRIPTION_INPUT = 'descriptionInput';
+const VALUE_INPUT = 'value';
+const DESCRIPTION_INPUT = 'description';
 const INITIAL_STATE = {
-  currencyInput: 'USD',
-  paymentMethod: 'cash',
-  expenseTag: 'food',
-  valueInput: '',
-  descriptionInput: '',
+  value: '',
+  description: '',
+  currency: 'USD',
+  method: 'cash',
+  tag: 'food',
+  exchangeRates: {},
 };
 class WalletForm extends Component {
   state = {
     ...INITIAL_STATE,
+    id: 0,
   };
 
   componentDidMount() {
@@ -30,14 +32,24 @@ class WalletForm extends Component {
     this.setState({ [id]: value });
   };
 
+  handleSubmitExpenses = () => {
+    const { getAPIExpenses } = this.props;
+    getAPIExpenses(this.state);
+    this.setState((prevState) => ({
+      id: prevState.id + 1,
+    }), this.setState({
+      ...INITIAL_STATE,
+    }));
+  };
+
   render() {
     const { globalCurrencies } = this.props;
     const {
-      currencyInput,
-      paymentMethod,
-      expenseTag,
-      valueInput,
-      descriptionInput,
+      currency,
+      method,
+      tag,
+      value,
+      description,
     } = this.state;
     return (
       <form>
@@ -47,7 +59,7 @@ class WalletForm extends Component {
             type="number"
             id={ VALUE_INPUT }
             data-testid="value-input"
-            value={ valueInput }
+            value={ value }
             onChange={ this.handleChange }
           />
         </label>
@@ -59,23 +71,29 @@ class WalletForm extends Component {
             id={ DESCRIPTION_INPUT }
             data-testid="description-input"
             onChange={ this.handleChange }
-            value={ descriptionInput }
+            value={ description }
           />
         </label>
 
         <SelectCurrency
           handleChange={ this.handleChange }
           currencies={ globalCurrencies }
-          currencyInput={ currencyInput }
+          currency={ currency }
         />
         <PaymentMethod
           handleChange={ this.handleChange }
-          paymentMethod={ paymentMethod }
+          method={ method }
         />
         <ExpenseTag
           handleChange={ this.handleChange }
-          expenseTag={ expenseTag }
+          tag={ tag }
         />
+        <button
+          type="button"
+          onClick={ this.handleSubmitExpenses }
+        >
+          Adicionar despesa
+        </button>
       </form>
     );
   }
@@ -83,16 +101,17 @@ class WalletForm extends Component {
 
 WalletForm.propTypes = {
   getAPICurrencies: PropTypes.func.isRequired,
+  getAPIExpenses: PropTypes.func.isRequired,
   globalCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   globalCurrencies: state.wallet.currencies,
-
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getAPICurrencies: () => dispatch(fetchAPIThunk()),
+  getAPICurrencies: () => dispatch(fetchCurrencyAPIThunk()),
+  getAPIExpenses: (formData) => dispatch(fetchExpenseAPIThunk(formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

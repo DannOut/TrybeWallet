@@ -3,7 +3,8 @@ import economyAPI from '../../services/API';
 import {
   LOGIN_USER,
   REQUEST_API,
-  RECEIVE_API_SUCCESS,
+  RECEIVE_CURRENCY_API_SUCCESS,
+  RECEIVE_EXPENSES_API_SUCCESS,
   RECEIVE_API_FAILURE,
 } from './types';
 
@@ -13,14 +14,20 @@ export const loginAction = (userData) => ({
   payload: userData,
 });
 
+//* function to filter 'USDT' as requested in REQ03
+const getCurrencies = (val) => Object.keys(val).filter((info) => info !== 'USDT');
+
 // * API TO MIDDLEWARE ACTIONS
+
+// Global API request
 export const requestAPIAction = () => ({
   type: REQUEST_API,
 });
 
-export const receiveAPISuccess = (data) => ({
-  type: RECEIVE_API_SUCCESS,
-  payload: data,
+// Currency API SUCCESS / FAILURE / FETCH
+export const receiveCurrencyAPISuccess = (data) => ({
+  type: RECEIVE_CURRENCY_API_SUCCESS,
+  payload: getCurrencies(data),
 });
 
 export const receiveAPIFailure = (error) => ({
@@ -28,11 +35,35 @@ export const receiveAPIFailure = (error) => ({
   error,
 });
 
-export const fetchAPIThunk = () => async (dispatch) => {
+// * // Expense API SUCCESS / FAILURE / FETCH
+
+// Expense API SUCCESS
+export const receiveExpenseAPISuccess = (data) => ({
+  type: RECEIVE_EXPENSES_API_SUCCESS,
+  payload: data,
+});
+
+// * // MiddleWare - Thunk
+// fetch Currency
+export const fetchCurrencyAPIThunk = () => async (dispatch) => {
   dispatch(requestAPIAction());
   try {
     const response = await economyAPI();
-    dispatch(receiveAPISuccess(response));
+    dispatch(receiveCurrencyAPISuccess(response));
+  } catch (error) {
+    dispatch(receiveAPIFailure(error));
+  }
+};
+
+// fetch Expenses
+export const fetchExpenseAPIThunk = (formInfo) => async (dispatch) => {
+  dispatch(requestAPIAction());
+  try {
+    const response = await economyAPI();
+    const payload = {
+      ...formInfo,
+      exchangeRates: { ...response } };
+    dispatch(receiveExpenseAPISuccess(payload));
   } catch (error) {
     dispatch(receiveAPIFailure(error));
   }
