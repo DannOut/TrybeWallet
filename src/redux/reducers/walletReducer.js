@@ -1,4 +1,3 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import {
   RECEIVE_API_FAILURE,
   RECEIVE_API_SUCCESS,
@@ -15,8 +14,10 @@ const INITIAL_STATE = {
   currency: '',
 };
 
+//* function to filter 'USDT' as requested in REQ03
+const getCurrencies = (curr) => Object.keys(curr).filter((info) => info !== 'USDT');
+
 const wallet = (state = INITIAL_STATE, action) => {
-  // const getCurrencies = ;
   switch (action.type) {
   case REQUEST_API:
     return {
@@ -28,7 +29,7 @@ const wallet = (state = INITIAL_STATE, action) => {
     console.log(action);
     return {
       ...state,
-      currencies: action.payload,
+      currencies: getCurrencies(action.payload),
       isFetching: false,
     };
 

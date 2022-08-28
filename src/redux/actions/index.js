@@ -2,9 +2,9 @@
 import economyAPI from '../../services/API';
 import {
   LOGIN_USER,
+  REQUEST_API,
   RECEIVE_API_SUCCESS,
   RECEIVE_API_FAILURE,
-  REQUEST_API,
 } from './types';
 
 // * Info login Action
@@ -28,7 +28,7 @@ export const receiveAPIFailure = (error) => ({
   error,
 });
 
-export const fetchAPI = () => async (dispatch) => {
+export const fetchAPIThunk = () => async (dispatch) => {
   dispatch(requestAPIAction());
   try {
     const response = await economyAPI();

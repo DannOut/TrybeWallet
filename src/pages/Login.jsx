@@ -63,12 +63,6 @@ class Login extends React.Component {
     history.push('/carteira');
   };
 
-  // ! usado para verificar o retorno da API, pode ser deletado caso necessário
-  // teste = async () => {
-  //   const teste = await economyAPI();
-  //   return console.log(teste);
-  // };
-
   render() {
     const { email, password, isDisabled } = this.state;
     return (

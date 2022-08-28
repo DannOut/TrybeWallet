@@ -4,22 +4,25 @@ import PropTypes from 'prop-types';
 import SelectCurrency from './SelectCurrency';
 import PaymentMethod from './PaymentMethod';
 import ExpenseTag from './ExpenseTag';
-import economyAPI from '../services/API';
+import { fetchAPIThunk } from '../redux/actions';
 
 const VALUE_INPUT = 'valueInput';
 const DESCRIPTION_INPUT = 'descriptionInput';
+const INITIAL_STATE = {
+  currencyInput: 'USD',
+  paymentMethod: 'cash',
+  expenseTag: 'food',
+  valueInput: '',
+  descriptionInput: '',
+};
 class WalletForm extends Component {
   state = {
-    currencies: [],
-    currencyInput: 'USD',
-    paymentMethod: 'cash',
-    expenseTag: 'food',
-    valueInput: '',
-    descriptionInput: '',
+    ...INITIAL_STATE,
   };
 
   componentDidMount() {
-    this.APItoArrayHandler();
+    const { getAPICurrencies } = this.props;
+    getAPICurrencies();
   }
 
   handleChange = ({ target }) => {
@@ -27,20 +30,10 @@ class WalletForm extends Component {
     this.setState({ [id]: value });
   };
 
-  APItoArrayHandler = async () => {
-    const { getAPICurrencies } = this.props;
-    const gettingAPI = await getAPICurrencies(economyAPI);
-    const fetchedValue = Object.keys(gettingAPI).map((key) => key)
-      .filter((value) => value !== 'USDT');
-    this.setState({
-      currencies: fetchedValue,
-    });
-  };
-
   render() {
+    const { globalCurrencies } = this.props;
     const {
       currencyInput,
-      currencies,
       paymentMethod,
       expenseTag,
       valueInput,
@@ -66,13 +59,13 @@ class WalletForm extends Component {
             id={ DESCRIPTION_INPUT }
             data-testid="description-input"
             onChange={ this.handleChange }
-            descriptionInput={ descriptionInput }
+            value={ descriptionInput }
           />
         </label>
 
         <SelectCurrency
           handleChange={ this.handleChange }
-          currencies={ currencies }
+          currencies={ globalCurrencies }
           currencyInput={ currencyInput }
         />
         <PaymentMethod
@@ -90,14 +83,16 @@ class WalletForm extends Component {
 
 WalletForm.propTypes = {
   getAPICurrencies: PropTypes.func.isRequired,
+  globalCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currencies: state.wallet.currencies,
+  globalCurrencies: state.wallet.currencies,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getAPICurrencies: (state) => dispatch(state),
+  getAPICurrencies: () => dispatch(fetchAPIThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
