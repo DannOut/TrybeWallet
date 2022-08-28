@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const EXPENSE_TAG = 'tag';
+const FOOD = 'Alimentação';
+const LEISURE = 'Lazer';
+const WORK = 'Trabalho';
+const TRANSPORT = 'Transporte';
+const HEALTH = 'Saúde';
 
 export default class ExpenseTag extends Component {
   render() {
@@ -16,19 +21,19 @@ export default class ExpenseTag extends Component {
           value={ tag }
           data-testid="tag-input"
         >
-          <option value="food">
+          <option value={ FOOD }>
             Alimentação
           </option>
-          <option value="leisure">
+          <option value={ LEISURE }>
             Lazer
           </option>
-          <option value="work">
+          <option value={ WORK }>
             Trabalho
           </option>
-          <option value="transport">
+          <option value={ TRANSPORT }>
             Transporte
           </option>
-          <option value="health">
+          <option value={ HEALTH }>
             Saúde
           </option>
         </select>
