@@ -24,27 +24,27 @@ export const requestAPIAction = () => ({
   type: REQUEST_API,
 });
 
-// Currency API SUCCESS / FAILURE / FETCH
-export const receiveCurrencyAPISuccess = (data) => ({
-  type: RECEIVE_CURRENCY_API_SUCCESS,
-  payload: getCurrencies(data),
-});
-
+// Global API failure
 export const receiveAPIFailure = (error) => ({
   type: RECEIVE_API_FAILURE,
   error,
 });
 
-// * // Expense API SUCCESS / FAILURE / FETCH
+//* // Currency API SUCCESS / FAILURE / FETCH //
+export const receiveCurrencyAPISuccess = (data) => ({
+  type: RECEIVE_CURRENCY_API_SUCCESS,
+  payload: getCurrencies(data),
+});
 
-// Expense API SUCCESS
+//* // Expense API SUCCESS / FAILURE / FETCH //
 export const receiveExpenseAPISuccess = (data) => ({
   type: RECEIVE_EXPENSES_API_SUCCESS,
   payload: data,
 });
 
-// * // MiddleWare - Thunk
-// fetch Currency
+//* // MiddleWare - Thunk //
+
+// fetch Global Currency
 export const fetchCurrencyAPIThunk = () => async (dispatch) => {
   dispatch(requestAPIAction());
   try {
@@ -55,7 +55,7 @@ export const fetchCurrencyAPIThunk = () => async (dispatch) => {
   }
 };
 
-// fetch Expenses
+// fetch Global State Expenses
 export const fetchExpenseAPIThunk = (formInfo) => async (dispatch) => {
   dispatch(requestAPIAction());
   try {

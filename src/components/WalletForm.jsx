@@ -37,9 +37,10 @@ class WalletForm extends Component {
     getAPIExpenses(this.state);
     this.setState((prevState) => ({
       id: prevState.id + 1,
-    }), this.setState({
-      ...INITIAL_STATE,
     }));
+    this.setState({
+      ...INITIAL_STATE,
+    });
   };
 
   render() {
