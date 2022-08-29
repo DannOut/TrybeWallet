@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import DeleteBtn from './DeleteBtn';
+import EditBtn from './EditBtn';
 
 class Table extends Component {
   mapExpensesToWallet = () => {
@@ -19,6 +21,12 @@ class Table extends Component {
           <td>{ Number(ask).toFixed(2) }</td>
           <td>{ Number(value * ask).toFixed(2) }</td>
           <td> Real </td>
+          <td>
+            <EditBtn />
+            <DeleteBtn
+              keyVal={ id }
+            />
+          </td>
         </tr>
       );
     });

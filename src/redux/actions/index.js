@@ -6,16 +6,17 @@ import {
   RECEIVE_CURRENCY_API_SUCCESS,
   RECEIVE_EXPENSES_API_SUCCESS,
   RECEIVE_API_FAILURE,
+  DELETE_EXPENSE,
 } from './types';
+
+//* function to filter 'USDT' as requested in REQ03
+const getCurrencies = (val) => Object.keys(val).filter((info) => info !== 'USDT');
 
 // * Info login Action
 export const loginAction = (userData) => ({
   type: LOGIN_USER,
   payload: userData,
 });
-
-//* function to filter 'USDT' as requested in REQ03
-const getCurrencies = (val) => Object.keys(val).filter((info) => info !== 'USDT');
 
 // * API TO MIDDLEWARE ACTIONS
 
@@ -41,6 +42,15 @@ export const receiveExpenseAPISuccess = (data) => ({
   type: RECEIVE_EXPENSES_API_SUCCESS,
   payload: data,
 });
+
+//* // DeleteExpenseInReducer REQ08
+export const deletedExpenseAction = (data) => {
+  console.log('action', data);
+  return {
+    type: DELETE_EXPENSE,
+    payload: data,
+  };
+};
 
 //* // MiddleWare - Thunk //
 

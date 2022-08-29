@@ -3,6 +3,7 @@ import {
   RECEIVE_EXPENSES_API_SUCCESS,
   RECEIVE_API_FAILURE,
   REQUEST_API,
+  DELETE_EXPENSE,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -14,8 +15,8 @@ const INITIAL_STATE = {
   error: '',
 };
 
-const wallet = (state = INITIAL_STATE, { type, payload, error }) => {
-  switch (type) {
+const wallet = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
   case REQUEST_API:
     return {
       ...state,
@@ -25,14 +26,14 @@ const wallet = (state = INITIAL_STATE, { type, payload, error }) => {
   case RECEIVE_CURRENCY_API_SUCCESS:
     return {
       ...state,
-      currencies: payload,
+      currencies: action.payload,
       isFetching: false,
     };
 
   case RECEIVE_EXPENSES_API_SUCCESS:
     return {
       ...state,
-      expenses: [...state.expenses, payload],
+      expenses: [...state.expenses, action.payload],
       isFetching: false,
     };
 
@@ -41,6 +42,12 @@ const wallet = (state = INITIAL_STATE, { type, payload, error }) => {
       ...state,
       error,
       isFetching: false,
+    };
+
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((val) => val.id !== action.payload),
     };
 
   default:
