@@ -12,7 +12,7 @@ class Table extends Component {
       const { ask, name } = exchangeRates[currency];
 
       return (
-        <tr key={ id }>
+        <tr key={ `id-${id}` }>
           <td>{ description }</td>
           <td>{ tag }</td>
           <td>{ method }</td>

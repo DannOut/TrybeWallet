@@ -5,6 +5,7 @@ import {
   REQUEST_API,
   DELETE_EXPENSE,
   EDIT_EXPENSE,
+  UPDATE_EDITED_EXPENSE,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -18,44 +19,48 @@ const INITIAL_STATE = {
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case REQUEST_API:
-    return {
-      ...state,
-      isFetching: true,
-    };
-
+  case REQUEST_API: return { ...state, isFetching: true };
   case RECEIVE_CURRENCY_API_SUCCESS:
     return {
       ...state,
       currencies: action.payload,
       isFetching: false,
     };
-
   case RECEIVE_EXPENSES_API_SUCCESS:
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
       isFetching: false,
     };
-
   case RECEIVE_API_FAILURE:
     return {
       ...state,
       error,
       isFetching: false,
     };
-
   case DELETE_EXPENSE:
-    return {
-      ...state,
+    return { ...state,
       expenses: state.expenses.filter((val) => val.id !== action.payload),
     };
-
   case EDIT_EXPENSE:
     return {
       ...state,
       idToEdit: action.payload,
       editor: true,
+    };
+  case UPDATE_EDITED_EXPENSE:
+    console.log('info recebida dentro do reducer:', action.payload);
+    console.log('action dentro do reducer:', action);
+    console.log('state dentro do reducer:', state);
+    return {
+      ...state,
+      idToEdit: 0,
+      editor: false,
+      expenses: state.expenses.map((val) => {
+        if (val.id === action.payload.id) {
+          return { ...val, ...action.payload };
+        } return val;
+      }),
     };
 
   default:

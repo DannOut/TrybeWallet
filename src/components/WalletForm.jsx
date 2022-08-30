@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import SelectCurrency from './SelectCurrency';
 import PaymentMethod from './PaymentMethod';
 import ExpenseTag from './ExpenseTag';
-import { fetchCurrencyAPIThunk, fetchExpenseAPIThunk } from '../redux/actions';
+import {
+  fetchCurrencyAPIThunk,
+  fetchExpenseAPIThunk,
+  updateEditedExpense,
+} from '../redux/actions';
 
 const VALUE_INPUT = 'value';
 const DESCRIPTION_INPUT = 'description';
@@ -27,18 +31,22 @@ class WalletForm extends Component {
     getAPICurrencies();
   }
 
-  componentDidUpdate() {
-    // const { isEditing } = this.state;
-    // const { editExpense } = this.props;
-    // const { idToEdit, expenses, editor } = editExpense;
-
-    // if (!isEditing && editor) {
-    //   const val = expenses.find(({ id }) => id === idToEdit);
-    //   this.setState({
-    //     ...val,
-    //   });
-    // }
+  componentDidUpdate(prevProps, prevState) {
+    this.editingId(prevState);
   }
+
+  // TODO criar um updated no final do edit que dispara uma action e atualiza o estado global com o valor atualizado e muda editor para false e idToEdit 0
+
+  editingId = (prevState) => {
+    const { editExpense } = this.props;
+    const { idToEdit, expenses, editor } = editExpense;
+    if (editor && !prevState.value && !prevState.description) {
+      const val = expenses.find(({ id }) => id === idToEdit);
+      this.setState({
+        ...val,
+      });
+    }
+  };
 
   handleChange = ({ target }) => {
     const { value, id } = target;
@@ -46,31 +54,19 @@ class WalletForm extends Component {
   };
 
   handleSubmitExpenses = () => {
-    const { getAPIExpenses } = this.props;
-    getAPIExpenses(this.state);
-    this.setState((prevState) => ({
-      id: prevState.id + 1,
-    }));
+    const { sendAPIExpenses, editExpense: { editor }, updateExpense } = this.props;
+    if (editor) {
+      console.log('enviei a informação para update', this.state);
+      updateExpense(this.state);
+    } else {
+      sendAPIExpenses(this.state);
+      this.setState((prevState) => ({
+        id: prevState.id + 1,
+      }));
+    }
     this.setState({
       ...INITIAL_STATE,
     });
-  };
-
-  // TODO criar um updated no final do edit que dispara uma action e atualiza o estado global com o valor atualizado e muda editor para false e idToEdit 0
-
-  editingId = () => {
-    const { editExpense } = this.props;
-    const { idToEdit, expenses, editor } = editExpense;
-    if (editor) {
-      console.log('editExpense:', editExpense);
-      console.log('idToEdit:', idToEdit);
-      console.log('expenses:', expenses);
-      const val = expenses.find(({ id }) => id === idToEdit);
-      console.log('clicked expense:', val);
-      // thi.setState({
-      //   ...val,
-      // });
-    }
   };
 
   render() {
@@ -78,8 +74,6 @@ class WalletForm extends Component {
     const { editor } = editExpense;
 
     const textHandlerBtn = editor ? 'Editar despesa' : 'Adicionar despesa';
-
-    this.editingId();
 
     const {
       currency,
@@ -138,7 +132,8 @@ class WalletForm extends Component {
 
 WalletForm.propTypes = {
   getAPICurrencies: PropTypes.func.isRequired,
-  getAPIExpenses: PropTypes.func.isRequired,
+  sendAPIExpenses: PropTypes.func.isRequired,
+  updateExpense: PropTypes.func.isRequired,
   globalCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
   editExpense: PropTypes.shape().isRequired,
 };
@@ -150,7 +145,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getAPICurrencies: () => dispatch(fetchCurrencyAPIThunk()),
-  getAPIExpenses: (formData) => dispatch(fetchExpenseAPIThunk(formData)),
+  sendAPIExpenses: (formData) => dispatch(fetchExpenseAPIThunk(formData)),
+  updateExpense: (formData) => dispatch(updateEditedExpense(formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

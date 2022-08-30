@@ -8,6 +8,7 @@ import {
   RECEIVE_API_FAILURE,
   DELETE_EXPENSE,
   EDIT_EXPENSE,
+  UPDATE_EDITED_EXPENSE,
 } from './types';
 
 //* function to filter 'USDT' as requested in REQ03
@@ -55,6 +56,15 @@ export const editedExpenseAction = (data) => ({
   type: EDIT_EXPENSE,
   payload: data,
 });
+
+//* //Update the Editited Expense REQ09
+export const updateEditedExpense = (data) => {
+  console.log('info chegou na action:', data);
+  return {
+    type: UPDATE_EDITED_EXPENSE,
+    payload: data,
+  };
+};
 
 //* // MiddleWare - Thunk //
 
