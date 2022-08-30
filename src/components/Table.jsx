@@ -22,7 +22,9 @@ class Table extends Component {
           <td>{ Number(value * ask).toFixed(2) }</td>
           <td> Real </td>
           <td>
-            <EditBtn />
+            <EditBtn
+              keyVal={ id }
+            />
             <DeleteBtn
               keyVal={ id }
             />

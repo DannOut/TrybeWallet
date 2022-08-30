@@ -4,6 +4,7 @@ import {
   RECEIVE_API_FAILURE,
   REQUEST_API,
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -48,6 +49,13 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: state.expenses.filter((val) => val.id !== action.payload),
+    };
+
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      idToEdit: action.payload,
+      editor: true,
     };
 
   default:

@@ -35,4 +35,5 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   deletedExpense: (id) => dispatch(deletedExpenseAction(id)),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(DeleteBtn);

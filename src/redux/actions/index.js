@@ -7,6 +7,7 @@ import {
   RECEIVE_EXPENSES_API_SUCCESS,
   RECEIVE_API_FAILURE,
   DELETE_EXPENSE,
+  EDIT_EXPENSE,
 } from './types';
 
 //* function to filter 'USDT' as requested in REQ03
@@ -44,13 +45,16 @@ export const receiveExpenseAPISuccess = (data) => ({
 });
 
 //* // DeleteExpenseInReducer REQ08
-export const deletedExpenseAction = (data) => {
-  console.log('action', data);
-  return {
-    type: DELETE_EXPENSE,
-    payload: data,
-  };
-};
+export const deletedExpenseAction = (data) => ({
+  type: DELETE_EXPENSE,
+  payload: data,
+});
+
+//* //EditThisExpense REQ09
+export const editedExpenseAction = (data) => ({
+  type: EDIT_EXPENSE,
+  payload: data,
+});
 
 //* // MiddleWare - Thunk //
 

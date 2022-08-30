@@ -27,6 +27,19 @@ class WalletForm extends Component {
     getAPICurrencies();
   }
 
+  componentDidUpdate() {
+    // const { isEditing } = this.state;
+    // const { editExpense } = this.props;
+    // const { idToEdit, expenses, editor } = editExpense;
+
+    // if (!isEditing && editor) {
+    //   const val = expenses.find(({ id }) => id === idToEdit);
+    //   this.setState({
+    //     ...val,
+    //   });
+    // }
+  }
+
   handleChange = ({ target }) => {
     const { value, id } = target;
     this.setState({ [id]: value });
@@ -43,8 +56,31 @@ class WalletForm extends Component {
     });
   };
 
+  // TODO criar um updated no final do edit que dispara uma action e atualiza o estado global com o valor atualizado e muda editor para false e idToEdit 0
+
+  editingId = () => {
+    const { editExpense } = this.props;
+    const { idToEdit, expenses, editor } = editExpense;
+    if (editor) {
+      console.log('editExpense:', editExpense);
+      console.log('idToEdit:', idToEdit);
+      console.log('expenses:', expenses);
+      const val = expenses.find(({ id }) => id === idToEdit);
+      console.log('clicked expense:', val);
+      // thi.setState({
+      //   ...val,
+      // });
+    }
+  };
+
   render() {
-    const { globalCurrencies } = this.props;
+    const { globalCurrencies, editExpense } = this.props;
+    const { editor } = editExpense;
+
+    const textHandlerBtn = editor ? 'Editar despesa' : 'Adicionar despesa';
+
+    this.editingId();
+
     const {
       currency,
       method,
@@ -93,7 +129,7 @@ class WalletForm extends Component {
           type="button"
           onClick={ this.handleSubmitExpenses }
         >
-          Adicionar despesa
+          { textHandlerBtn }
         </button>
       </form>
     );
@@ -104,10 +140,12 @@ WalletForm.propTypes = {
   getAPICurrencies: PropTypes.func.isRequired,
   getAPIExpenses: PropTypes.func.isRequired,
   globalCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  editExpense: PropTypes.shape().isRequired,
 };
 
 const mapStateToProps = (state) => ({
   globalCurrencies: state.wallet.currencies,
+  editExpense: state.wallet,
 });
 
 const mapDispatchToProps = (dispatch) => ({
