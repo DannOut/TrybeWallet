@@ -15,7 +15,6 @@ class Login extends React.Component {
     isDisabled: true,
   };
 
-  // TODO Remover ao final do projeto caso não seja usado
   componentDidMount() {
     this.handleFormValidation();
   }
