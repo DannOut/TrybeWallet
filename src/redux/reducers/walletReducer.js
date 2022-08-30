@@ -49,13 +49,12 @@ const wallet = (state = INITIAL_STATE, action) => {
       editor: true,
     };
   case UPDATE_EDITED_EXPENSE:
-    console.log('info recebida dentro do reducer:', action.payload);
-    console.log('action dentro do reducer:', action);
-    console.log('state dentro do reducer:', state);
     return {
       ...state,
       idToEdit: 0,
       editor: false,
+
+      //* ajuda do cadu para corrigir o bug !
       expenses: state.expenses.map((val) => {
         if (val.id === action.payload.id) {
           return { ...val, ...action.payload };

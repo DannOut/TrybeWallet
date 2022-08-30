@@ -35,8 +35,6 @@ class WalletForm extends Component {
     this.editingId(prevState);
   }
 
-  // TODO criar um updated no final do edit que dispara uma action e atualiza o estado global com o valor atualizado e muda editor para false e idToEdit 0
-
   editingId = (prevState) => {
     const { editExpense } = this.props;
     const { idToEdit, expenses, editor } = editExpense;
