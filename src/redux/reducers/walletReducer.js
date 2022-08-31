@@ -1,7 +1,6 @@
 import {
   RECEIVE_CURRENCY_API_SUCCESS,
   RECEIVE_EXPENSES_API_SUCCESS,
-  RECEIVE_API_FAILURE,
   REQUEST_API,
   DELETE_EXPENSE,
   EDIT_EXPENSE,
@@ -30,12 +29,6 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.payload],
-      isFetching: false,
-    };
-  case RECEIVE_API_FAILURE:
-    return {
-      ...state,
-      error,
       isFetching: false,
     };
   case DELETE_EXPENSE:
