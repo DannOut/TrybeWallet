@@ -54,7 +54,6 @@ class WalletForm extends Component {
   handleSubmitExpenses = () => {
     const { sendAPIExpenses, editExpense: { editor }, updateExpense } = this.props;
     if (editor) {
-      console.log('enviei a informação para update', this.state);
       updateExpense(this.state);
     } else {
       sendAPIExpenses(this.state);

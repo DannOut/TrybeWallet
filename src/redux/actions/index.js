@@ -58,13 +58,10 @@ export const editedExpenseAction = (data) => ({
 });
 
 //* //Update the Editited Expense REQ09
-export const updateEditedExpense = (data) => {
-  console.log('info chegou na action:', data);
-  return {
-    type: UPDATE_EDITED_EXPENSE,
-    payload: data,
-  };
-};
+export const updateEditedExpense = (data) => ({
+  type: UPDATE_EDITED_EXPENSE,
+  payload: data,
+});
 
 //* // MiddleWare - Thunk //
 
