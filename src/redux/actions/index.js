@@ -5,7 +5,7 @@ import {
   REQUEST_API,
   RECEIVE_CURRENCY_API_SUCCESS,
   RECEIVE_EXPENSES_API_SUCCESS,
-  RECEIVE_API_FAILURE,
+  // RECEIVE_API_FAILURE,
   DELETE_EXPENSE,
   EDIT_EXPENSE,
   UPDATE_EDITED_EXPENSE,
@@ -28,10 +28,10 @@ export const requestAPIAction = () => ({
 });
 
 // Global API failure
-export const receiveAPIFailure = (error) => ({
-  type: RECEIVE_API_FAILURE,
-  error,
-});
+// export const receiveAPIFailure = (error) => ({
+//   type: RECEIVE_API_FAILURE,
+//   error,
+// });
 
 //* // Currency API SUCCESS / FAILURE / FETCH //
 export const receiveCurrencyAPISuccess = (data) => ({
@@ -68,24 +68,16 @@ export const updateEditedExpense = (data) => ({
 // fetch Global Currency
 export const fetchCurrencyAPIThunk = () => async (dispatch) => {
   dispatch(requestAPIAction());
-  try {
-    const response = await economyAPI();
-    dispatch(receiveCurrencyAPISuccess(response));
-  } catch (error) {
-    dispatch(receiveAPIFailure(error));
-  }
+  const response = await economyAPI();
+  dispatch(receiveCurrencyAPISuccess(response));
 };
 
 // fetch Global State Expenses
 export const fetchExpenseAPIThunk = (formInfo) => async (dispatch) => {
   dispatch(requestAPIAction());
-  try {
-    const response = await economyAPI();
-    const payload = {
-      ...formInfo,
-      exchangeRates: { ...response } };
-    dispatch(receiveExpenseAPISuccess(payload));
-  } catch (error) {
-    dispatch(receiveAPIFailure(error));
-  }
+  const response = await economyAPI();
+  const payload = {
+    ...formInfo,
+    exchangeRates: { ...response } };
+  dispatch(receiveExpenseAPISuccess(payload));
 };
