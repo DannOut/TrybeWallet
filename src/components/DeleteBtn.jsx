@@ -11,6 +11,8 @@ class DeleteBtn extends Component {
   };
 
   render() {
+    // const { keyVal } = this.props;
+    // console.log('render inside DeleteBtn', keyVal);
     return (
       <button
         type="button"
