@@ -5,6 +5,14 @@ import DeleteBtn from './DeleteBtn';
 import EditBtn from './EditBtn';
 
 class Table extends Component {
+  randomGenerator = () => {
+    const tenThousand = 10000;
+    const val1 = Math.floor((Math.random() * tenThousand));
+    const val2 = Math.floor((Math.random() * tenThousand));
+    const val3 = Math.floor((Math.random() * tenThousand));
+    return `${val1} - ${val2} - ${val3} - ${val1}${val2}${val3}`;
+  };
+
   mapExpensesToWallet = () => {
     const { allExpenses } = this.props;
     return allExpenses.map((val) => {
@@ -12,7 +20,7 @@ class Table extends Component {
       const { ask, name } = exchangeRates[currency];
 
       return (
-        <tr key={ `id-${id}` }>
+        <tr key={ this.randomGenerator() }>
           <td>{ description }</td>
           <td>{ tag }</td>
           <td>{ method }</td>

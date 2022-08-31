@@ -13,7 +13,6 @@ const INITIAL_STATE = {
   editor: false,
   idToEdit: 0,
   isFetching: false,
-  error: '',
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
