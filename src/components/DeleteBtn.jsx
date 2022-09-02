@@ -11,11 +11,14 @@ class DeleteBtn extends Component {
   };
 
   render() {
+    const { editor } = this.props;
     return (
       <button
         type="button"
         data-testid="delete-btn"
         onClick={ this.deleteThisExpense }
+        disabled={ editor }
+        className="button is-small is-danger is-rounded"
       >
         Deletar despesa
       </button>
@@ -26,6 +29,7 @@ class DeleteBtn extends Component {
 DeleteBtn.propTypes = {
   keyVal: PropTypes.number.isRequired,
   deletedExpense: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

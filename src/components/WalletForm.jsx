@@ -19,8 +19,8 @@ const INITIAL_STATE = {
   value: '',
   description: '',
   currency: 'USD',
-  method: 'cash',
-  tag: 'food',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
   exchangeRates: {},
 };
 class WalletForm extends Component {
@@ -86,24 +86,6 @@ class WalletForm extends Component {
       <form className=" base__form">
         <div className="columns">
           <div className="field">
-            <label htmlFor={ VALUE_INPUT } className="column label">
-              Valor:
-              <div className="control has-icons-left">
-                <input
-                  type="number"
-                  id={ VALUE_INPUT }
-                  data-testid="value-input"
-                  value={ value }
-                  onChange={ this.handleChange }
-                  className="input"
-                />
-                <span className="icon is-small is-left">
-                  <Icon path={ mdiCurrencyUsd } size={ 1 } title="User Email" />
-                </span>
-              </div>
-            </label>
-          </div>
-          <div className="field">
             <label htmlFor={ DESCRIPTION_INPUT } className="column label">
               Descrição:
               <div className="control has-icons-left">
@@ -117,6 +99,24 @@ class WalletForm extends Component {
                 />
                 <span className="icon is-small is-left">
                   <Icon path={ mdiText } size={ 1 } title="User Email" />
+                </span>
+              </div>
+            </label>
+          </div>
+          <div className="field">
+            <label htmlFor={ VALUE_INPUT } className="column label">
+              Valor:
+              <div className="control has-icons-left">
+                <input
+                  type="number"
+                  id={ VALUE_INPUT }
+                  data-testid="value-input"
+                  value={ value }
+                  onChange={ this.handleChange }
+                  className="input"
+                />
+                <span className="icon is-small is-left">
+                  <Icon path={ mdiCurrencyUsd } size={ 1 } title="User Email" />
                 </span>
               </div>
             </label>

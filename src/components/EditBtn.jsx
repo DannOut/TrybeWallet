@@ -11,11 +11,14 @@ class EditBtn extends Component {
   };
 
   render() {
+    const { editor } = this.props;
     return (
       <button
         type="button"
         data-testid="edit-btn"
         onClick={ this.editThisExpense }
+        disabled={ editor }
+        className="button is-small is-warning is-rounded"
       >
         Editar despesa
       </button>
@@ -26,6 +29,7 @@ class EditBtn extends Component {
 EditBtn.propTypes = {
   keyVal: PropTypes.number.isRequired,
   editedExpense: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

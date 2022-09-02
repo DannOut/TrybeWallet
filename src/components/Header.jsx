@@ -18,14 +18,14 @@ class Header extends Component {
     const { userEmail } = this.props;
     const total = this.totalValueExpenses();
     return (
-      <header className="hero has-background-info  is-small">
+      <header className="hero has-background-info-dark  is-small header__personal">
         <div className="hero-body">
           <div className="icon-text header__useremail">
-            <span className="icon has-text-grey-lighter">
+            <span className="icon has-text-white">
               <Icon path={ mdiAccount } size={ 1 } title="Total Value" />
             </span>
             <h3
-              className="has-text-grey-lighter"
+              className="has-text-white"
               data-testid="email-field"
             >
               { userEmail }
@@ -33,17 +33,17 @@ class Header extends Component {
           </div>
           <div>
             <div className="icon-text">
-              <span className="icon has-text-grey-lighter">
+              <span className="icon has-text-white">
                 <Icon path={ mdiCurrencyUsd } size={ 1 } title="Total Value" />
               </span>
               <h3
-                className="BRL__smallgap has-text-grey-lighter"
+                className="BRL__smallgap has-text-white"
                 data-testid="total-field"
               >
                 { total.toFixed(2) }
               </h3>
               <h3
-                className="BRL__smallgap has-text-grey-lighter"
+                className="BRL__smallgap has-text-white"
                 data-testid="header-currency-field"
               >
                 BRL

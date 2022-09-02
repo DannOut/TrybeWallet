@@ -11,12 +11,17 @@
 }
 
 .BRL__smallgap {
+  font-size: x-large;
   margin-left: 5px;
 }
 
 .header__useremail {
   font-size: large;
   margin-bottom: 10px;
+}
+
+.header__edit {
+  background-color: #00d1b2;
 }
 
 .button__form {
