@@ -6,10 +6,14 @@
     "node": "16"
   },
   "dependencies": {
+    "@mdi/font": "^7.0.96",
+    "@mdi/js": "^7.0.96",
+    "@mdi/react": "^1.6.1",
     "@redux-devtools/extension": "3.2.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
+    "bulma": "^0.9.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "4.4.0",

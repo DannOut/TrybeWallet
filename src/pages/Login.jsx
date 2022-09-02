@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import PropTypes from 'prop-types';
+import Icon from '@mdi/react';
+import { mdiEmail, mdiLock } from '@mdi/js';
 import { connect } from 'react-redux';
 import { loginAction } from '../redux/actions';
-// import economyAPI from '../services/API';
+import '../App.css';
 
 const EMAIL_HTML_ATTRIB = 'email';
 const PASSWORD_HTML_ATTRIB = 'password';
@@ -65,38 +68,59 @@ class Login extends React.Component {
   render() {
     const { email, password, isDisabled } = this.state;
     return (
-      <form>
-        <label htmlFor={ EMAIL_HTML_ATTRIB }>
-          Email:
-          <input
-            type={ EMAIL_HTML_ATTRIB }
-            name={ EMAIL_HTML_ATTRIB }
-            id={ EMAIL_HTML_ATTRIB }
-            data-testid="email-input"
-            onChange={ this.handleChange }
-            value={ email }
-          />
-        </label>
-        <label htmlFor={ PASSWORD_HTML_ATTRIB }>
-          Password:
-          <input
-            type={ PASSWORD_HTML_ATTRIB }
-            name={ PASSWORD_HTML_ATTRIB }
-            id={ PASSWORD_HTML_ATTRIB }
-            data-testid="password-input"
-            onChange={ this.handleChange }
-            value={ password }
-          />
-        </label>
-        <button
-          type="button"
-          disabled={ isDisabled }
-          placeholder="type your password"
-          onClick={ this.handleLoginSubmit }
-        >
-          Entrar
-        </button>
-      </form>
+      <div className="app__body">
+        <form className="box has-background-warning-light">
+          <div className="field">
+            <label className="label" htmlFor={ EMAIL_HTML_ATTRIB }>
+              Email:
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  type={ EMAIL_HTML_ATTRIB }
+                  name={ EMAIL_HTML_ATTRIB }
+                  id={ EMAIL_HTML_ATTRIB }
+                  data-testid="email-input"
+                  onChange={ this.handleChange }
+                  value={ email }
+                  className="input is-success"
+                />
+                <span className="icon is-small is-left">
+                  <Icon path={ mdiEmail } size={ 1 } title="User Email" />
+                </span>
+              </div>
+            </label>
+          </div>
+          <div className="field">
+            <label className="label" htmlFor={ PASSWORD_HTML_ATTRIB }>
+              Password:
+              <div className="control has-icons-left has-icons-right">
+                <input
+                  type={ PASSWORD_HTML_ATTRIB }
+                  name={ PASSWORD_HTML_ATTRIB }
+                  id={ PASSWORD_HTML_ATTRIB }
+                  data-testid="password-input"
+                  onChange={ this.handleChange }
+                  value={ password }
+                  className="input"
+                />
+                <span className="icon is-small is-left">
+                  <Icon path={ mdiLock } size={ 1 } />
+                </span>
+              </div>
+            </label>
+          </div>
+          <div className="column">
+            <button
+              type="button"
+              disabled={ isDisabled }
+              placeholder="type your password"
+              onClick={ this.handleLoginSubmit }
+              className="button is-primary is-rounded"
+            >
+              Entrar
+            </button>
+          </div>
+        </form>
+      </div>
     );
   }
 }

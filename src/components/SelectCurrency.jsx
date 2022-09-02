@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Icon from '@mdi/react';
+import { mdiEarth } from '@mdi/js';
 
 const CURRENCY_INPUT = 'currency';
 class SelectCurrency extends Component {
@@ -16,17 +18,24 @@ class SelectCurrency extends Component {
     ));
 
     return (
-      <label htmlFor={ CURRENCY_INPUT }>
+      <label htmlFor={ CURRENCY_INPUT } className="column label">
         Moeda
-        <select
-          name={ CURRENCY_INPUT }
-          id={ CURRENCY_INPUT }
-          value={ currency }
-          data-testid="currency-input"
-          onChange={ handleChange }
-        >
-          { optionsToForms }
-        </select>
+        <div className="control has-icons-left">
+          <div className="select">
+            <select
+              name={ CURRENCY_INPUT }
+              id={ CURRENCY_INPUT }
+              value={ currency }
+              data-testid="currency-input"
+              onChange={ handleChange }
+            >
+              { optionsToForms }
+            </select>
+            <div className="icon is-small is-left">
+              <Icon path={ mdiEarth } size={ 1 } />
+            </div>
+          </div>
+        </div>
       </label>
     );
   }

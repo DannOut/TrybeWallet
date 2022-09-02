@@ -1,5 +1,8 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Icon from '@mdi/react';
+import { mdiAccount, mdiCurrencyUsd } from '@mdi/js';
 import { connect } from 'react-redux';
 
 class Header extends Component {
@@ -15,12 +18,40 @@ class Header extends Component {
     const { userEmail } = this.props;
     const total = this.totalValueExpenses();
     return (
-      <header>
-        <h3 data-testid="email-field">
-          { userEmail }
-        </h3>
-        <h3 data-testid="header-currency-field"> BRL </h3>
-        <h3 data-testid="total-field">{ total.toFixed(2) }</h3>
+      <header className="hero has-background-info  is-small">
+        <div className="hero-body">
+          <div className="icon-text header__useremail">
+            <span className="icon has-text-grey-lighter">
+              <Icon path={ mdiAccount } size={ 1 } title="Total Value" />
+            </span>
+            <h3
+              className="has-text-grey-lighter"
+              data-testid="email-field"
+            >
+              { userEmail }
+            </h3>
+          </div>
+          <div>
+            <div className="icon-text">
+              <span className="icon has-text-grey-lighter">
+                <Icon path={ mdiCurrencyUsd } size={ 1 } title="Total Value" />
+              </span>
+              <h3
+                className="BRL__smallgap has-text-grey-lighter"
+                data-testid="total-field"
+              >
+                { total.toFixed(2) }
+              </h3>
+              <h3
+                className="BRL__smallgap has-text-grey-lighter"
+                data-testid="header-currency-field"
+              >
+                BRL
+              </h3>
+
+            </div>
+          </div>
+        </div>
       </header>
     );
   }

@@ -5,7 +5,7 @@ import DeleteBtn from './DeleteBtn';
 import EditBtn from './EditBtn';
 
 class Table extends Component {
-  randomGenerator = () => {
+  randomKeyGenerator = () => {
     const tenThousand = 10000;
     const val1 = Math.floor((Math.random() * tenThousand));
     const val2 = Math.floor((Math.random() * tenThousand));
@@ -20,7 +20,7 @@ class Table extends Component {
       const { ask, name } = exchangeRates[currency];
 
       return (
-        <tr key={ this.randomGenerator() }>
+        <tr key={ this.randomKeyGenerator() }>
           <td>{ description }</td>
           <td>{ tag }</td>
           <td>{ method }</td>

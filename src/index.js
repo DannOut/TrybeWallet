@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './redux/store';
+import 'bulma/css/bulma.min.css';
 
 ReactDOM.render(
   <BrowserRouter>

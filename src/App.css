@@ -1,41 +1,25 @@
-.App {
+.app__body {
+  align-items: center;
+  background-color: grey;
+  background-image: url('../imgs/stonks-768x539.png');
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.BRL__smallgap {
+  margin-left: 5px;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header__useremail {
+  font-size: large;
+  margin-bottom: 10px;
 }
 
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
+.button__form {
+  align-self: center;
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
 }
