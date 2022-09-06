@@ -18,6 +18,7 @@ const INITIAL_STATE = {
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case REQUEST_API: return { ...state, isFetching: true };
+
   case RECEIVE_CURRENCY_API_SUCCESS:
     return {
       ...state,

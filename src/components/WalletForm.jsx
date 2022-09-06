@@ -21,7 +21,6 @@ const INITIAL_STATE = {
   currency: 'USD',
   method: 'Dinheiro',
   tag: 'Alimentação',
-  exchangeRates: {},
 };
 class WalletForm extends Component {
   state = {
