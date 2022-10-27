@@ -49,5 +49,4 @@ Instale as dependências do projeto.
 
 ![Screenshot from 2022-10-27 13-50-49](https://user-images.githubusercontent.com/39223055/198351333-ee67f1cc-6db3-475b-88d8-95aa2065e618.png)
 
-  Desenvolvido por: [Daniel Outeiro](https://www.linkedin.com/in/daniel-outeiro/)
-  © 2022.
+  Desenvolvido por: [Daniel Outeiro](https://www.linkedin.com/in/daniel-outeiro/)© 2022.
